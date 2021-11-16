@@ -1,0 +1,26 @@
+-- drop table if exists Units cascade;
+-- drop table if exists Employees cascade;
+-- drop table if exists Unit_employees cascade;
+-- drop table if exists Unit_chiefs cascade;
+
+create table if not exists Units(
+	id serial primary key,
+	name character varying(200) unique not null
+);
+
+create table if not exists Employees(
+	id serial primary key,
+	name character varying(150) not null
+);
+
+ create table if not exists Unit_employees(
+	id serial primary key,
+	unit_id integer references Units(id) not null,
+	employee_id integer references Employees(id) not null
+);
+
+create table if not exists Unit_chiefs(
+	id serial primary key,
+	unit_id integer references Units(id) not null,
+	chief_id integer references Employees(id) not null
+);
